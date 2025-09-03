@@ -371,7 +371,7 @@ async def get_brand_analytics(brand_name: str):
             sort=[("timestamp", -1)], 
             limit=30
         )
-        analytics = await analytics_cursor.to_list(length=30)
+        analytics_raw = await analytics_cursor.to_list(length=30)
         
         # Get recent mentions
         mentions_cursor = db.mentions.find(
@@ -379,7 +379,20 @@ async def get_brand_analytics(brand_name: str):
             sort=[("timestamp", -1)], 
             limit=50
         )
-        mentions = await mentions_cursor.to_list(length=50)
+        mentions_raw = await mentions_cursor.to_list(length=50)
+        
+        # Convert MongoDB documents to JSON-serializable format
+        analytics = []
+        for doc in analytics_raw:
+            if '_id' in doc:
+                del doc['_id']  # Remove MongoDB ObjectId
+            analytics.append(doc)
+        
+        mentions = []
+        for doc in mentions_raw:
+            if '_id' in doc:
+                del doc['_id']  # Remove MongoDB ObjectId
+            mentions.append(doc)
         
         return {
             "brand": brand_name,
