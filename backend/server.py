@@ -361,7 +361,7 @@ async def get_brands():
     """Get list of all tracked brands"""
     return {"brands": BRANDS, "total_brands": len(ALL_BRANDS)}
 
-@app.get("/brand/{brand_name}/analytics")
+@app.get("/api/brand/{brand_name}/analytics")
 async def get_brand_analytics(brand_name: str):
     """Get detailed analytics for a specific brand"""
     try:
