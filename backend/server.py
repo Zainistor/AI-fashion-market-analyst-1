@@ -295,7 +295,7 @@ async def collect_data():
         logger.error(f"Error collecting data: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/dashboard", response_model=DashboardData)
+@app.get("/api/dashboard", response_model=DashboardData)
 async def get_dashboard_data():
     """Get comprehensive dashboard data"""
     try:
