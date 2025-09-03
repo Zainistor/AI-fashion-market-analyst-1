@@ -242,7 +242,11 @@ def predict_market_share(brand: str, all_mentions: List[BrandMention]) -> float:
 async def root():
     return {"message": "Fashion Market Analyst API", "status": "running"}
 
-@app.post("/collect-data")
+@app.get("/api/")
+async def api_root():
+    return {"message": "Fashion Market Analyst API", "status": "running"}
+
+@app.post("/api/collect-data")
 async def collect_data():
     """Collect data for all brands and store in database"""
     try:
