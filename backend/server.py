@@ -356,7 +356,7 @@ async def get_dashboard_data():
         logger.error(f"Error getting dashboard data: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/brands")
+@app.get("/api/brands")
 async def get_brands():
     """Get list of all tracked brands"""
     return {"brands": BRANDS, "total_brands": len(ALL_BRANDS)}
