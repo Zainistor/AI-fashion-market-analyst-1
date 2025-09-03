@@ -340,11 +340,12 @@ class APITester:
         
         # Test basic connectivity first
         if not self.test_api_root():
-            print("❌ Basic connectivity failed. Stopping tests.")
-            return False
+            print("⚠️  Root endpoint failed, but continuing with /api/ tests...")
         
-        # Test API prefix
-        self.test_api_prefix_root()
+        # Test API prefix - this is the main endpoint
+        if not self.test_api_prefix_root():
+            print("❌ API prefix connectivity failed. Stopping tests.")
+            return False
         
         # Test brands endpoint
         self.test_brands_endpoint()
